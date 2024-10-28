@@ -27,7 +27,7 @@ def generate_data(
     schema_version: str,
     relative_paths: bool = False,
 ):  # type: (str) -> dict[str, Any]
-    """Generate the build-details.json data (PEP 738).
+    """Generate the build-details.json data (PEP 739).
 
     :param schema_version: The schema version of the data we want to generate.
     :param relative_paths: Whether to specify paths as absolute, or as relative to ``base_prefix``.
