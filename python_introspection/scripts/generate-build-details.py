@@ -49,7 +49,7 @@ def generate_data(
         'path': sys.executable,
     }
     data['abi'] = {
-        'flags': sys.abiflags.split(),
+        'flags': list(sys.abiflags),
         'extension_suffix': sysconfig.get_config_var('EXT_SUFFIX'),
     }
     for suffix in importlib.machinery.EXTENSION_SUFFIXES:
