@@ -24,9 +24,9 @@ def get_dict_key(dict_, key):  # (dict[str, Any], tuple[Any, ...]) -> dict[str, 
 
 
 def generate_data(
-    schema_version: str,
-    relative_paths: bool = False,
-):  # type: (str) -> dict[str, Any]
+    schema_version,
+    relative_paths=False,
+):  # type: (str, bool) -> dict[str, Any]
     """Generate the build-details.json data (PEP 739).
 
     :param schema_version: The schema version of the data we want to generate.
