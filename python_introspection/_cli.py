@@ -119,7 +119,7 @@ class Console:
 
     def _visible_text_lenght(self, text: str) -> int:
         """Takes a text with style placeholders and calculates the text length considering only the visible characters."""
-        return len(text.format(**self.styles_DISABLED))
+        return len(text.format(**self.styles))
 
     def _wrap_text(self, text: str, line_prefix: str = '') -> list[str]:
         """Wraps text to fit the console width, keeping whitespace and empty lines."""
