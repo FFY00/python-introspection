@@ -19,9 +19,9 @@ def main() -> None:
         help='Python interpreter to introspect (default: current interpreter).',
     )
     parser.add_argument(
-        '--write-to',
+        '--output',
         type=pathlib.Path,
-        help='Write data to the specified file.',
+        help='Output file.',
     )
     subparsers = parser.add_subparsers(
         required=True,
@@ -55,7 +55,7 @@ def main() -> None:
     assert data
 
     json_data = json.dumps(data, indent=2)
-    if args.write_to:
+    if args.output:
         args.parent.mkdir(parents=True, exist_ok=True)
     else:
         print(json_data)
