@@ -198,3 +198,4 @@ if __name__ == '__main__':
                 'message': str(e),
             }
         }
+        print(json.dumps(data, indent=2))
