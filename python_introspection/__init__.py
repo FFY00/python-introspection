@@ -96,10 +96,13 @@ class PythonInterpreter:
     def generate_build_details(
         self,
         *,
-        schema_version: Literal['1'] = '1',
+        schema_version: Literal['1.0'] = '1.0',
         relative_paths: bool = False,
+        config_file_path: os.PathLike | str | None = None,
     ) -> dict[str, Any]:
         args = ['--schema-version', schema_version]
         if relative_paths:
             args.append('--relative-paths')
+        if config_file_path:
+            args.append(f'--config-file-path={os.fspath(config_file_path)}')
         return self._run_script('generate-build-details.py', *args)

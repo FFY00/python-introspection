@@ -34,7 +34,7 @@ def main() -> None:
     )
     install_details_parser.add_argument(
         '--schema-version',
-        default='1',
+        default='1.0',
         help='Schema version of the build-details.json file to generate.',
     )
     install_details_parser.add_argument(
