@@ -51,7 +51,7 @@ class Console:
         return sys.stdout.isatty()
 
     def _get_styles_dict(self) -> bool:
-        if self._should_enable_colors:
+        if self._should_enable_colors():
             return self._STYLES_COLOR_ENABLED
         else:
             return self._STYLES_COLOR_DISABLED
