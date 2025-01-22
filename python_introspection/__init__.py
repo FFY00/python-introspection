@@ -48,6 +48,7 @@ class IntrospectionCommandError(IntrospectionError):
                     raise ValueError(error_msg)
         super().__init__(message)
         self.command = process.args
+        self.stderr = process.stderr
         self.error_info = error_info
 
 
@@ -71,7 +72,7 @@ class PythonInterpreter:
     def _run_script(self, script_name: str, *args: str) -> dict[str, Any]:
         command = [self._path, os.fspath(_scripts / script_name), *args]
         self._logger.debug(f'Running command: {shlex.join(command)}')
-        process = subprocess.run(command, capture_output=True)
+        process = subprocess.run(command, capture_output=True, text=True)
 
         try:
             script_output = json.loads(process.stdout)

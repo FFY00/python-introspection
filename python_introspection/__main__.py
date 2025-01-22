@@ -68,6 +68,12 @@ if __name__ == '__main__':
         except CommandLineError as e:
             console.error(str(e))
             sys.exit(1)
+        except python_introspection.IntrospectionCommandError as e:
+            console.print('{dim}', end='', file=sys.stderr)
+            sys.stderr.write(e.stderr)
+            console.print('{reset}', file=sys.stderr)
+            console.error(str(e))
+            sys.exit(1)
         except Exception as e:
             console.error(str(e), print_exception=True)
             sys.exit(1)
