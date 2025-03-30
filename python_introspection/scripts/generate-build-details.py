@@ -61,6 +61,7 @@ def generate_data(schema_version):
     PY3LIBRARY = sysconfig.get_config_var('PY3LIBRARY')
     LIBPYTHON = sysconfig.get_config_var('LIBPYTHON')
     LIBPC = sysconfig.get_config_var('LIBPC')
+    LIBPL = sysconfig.get_config_var('LIBPL')
 
     if os.name == 'posix':
         # On POSIX, LIBRARY is always the static library, while LDLIBRARY is the
@@ -106,7 +107,11 @@ def generate_data(schema_version):
         data['libpython']['link_extensions'] = bool(LIBPYTHON)
 
     if has_static_library:
+        # Static library can be in a variety of places
         data['libpython']['static'] = os.path.join(LIBDIR, LIBRARY)
+        if not os.path.exists(data['libpython']['static']):
+            if os.path.exists(os.path.join(LIBPL, LIBRARY)):
+                data['libpython']['static'] = os.path.join(LIBPL, LIBRARY)
 
     data['c_api']['include'] = sysconfig.get_path('include')
     if LIBPC:
