@@ -96,6 +96,12 @@ def generate_data(schema_version):
                 break
 
         data['libpython']['dynamic'] = os.path.join(LIBDIR, LDLIBRARY)
+        if not os.path.exists(data['libpython']['dynamic']):
+            # macOS has a different location
+            PYTHONFRAMEWORKPREFIX = sysconfig.get_config_var('PYTHONFRAMEWORKPREFIX')
+            if os.path.exists(os.path.join(PYTHONFRAMEWORKPREFIX, LDLIBRARY)):
+                data['libpython']['dynamic'] = os.path.join(PYTHONFRAMEWORKPREFIX, LDLIBRARY)
+
         # FIXME: Not sure if windows has a different dll for the stable ABI, and
         #        even if it does, currently we don't have a way to get its name.
         if PY3LIBRARY:
