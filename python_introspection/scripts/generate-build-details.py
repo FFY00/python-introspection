@@ -113,7 +113,7 @@ def generate_data(schema_version):
             if os.path.exists(os.path.join(LIBPL, LIBRARY)):
                 data['libpython']['static'] = os.path.join(LIBPL, LIBRARY)
 
-    data['c_api']['include'] = sysconfig.get_path('include')
+    data['c_api']['headers'] = sysconfig.get_path('include')
     if LIBPC:
         data['c_api']['pkgconfig_path'] = LIBPC
 
