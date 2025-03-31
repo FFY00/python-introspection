@@ -140,6 +140,11 @@ def make_paths_relative(data, config_path=None):  # (dict[str, Any], str | None)
             container = data
             for part in parent.split('.'):
                 container = container[part]
+
+            # KeyError not raised in DefaultDict
+            if child not in container:
+                continue
+
             current_path = container[child]
         except KeyError:
             continue
