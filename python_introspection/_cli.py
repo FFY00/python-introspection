@@ -8,13 +8,8 @@ import textwrap
 import traceback
 import warnings
 
+from collections.abc import Mapping
 from typing import ClassVar, TextIO
-
-
-if sys.version_info >= (3, 9):
-    from collections.abc import Mapping
-else:
-    from typing.abc import Mapping
 
 
 class Console:
