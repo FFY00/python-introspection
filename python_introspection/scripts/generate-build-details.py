@@ -31,7 +31,7 @@ def generate_data(schema_version):  # () -> None  # noqa: C901
     """
 
     if schema_version != '1.0':
-        raise ValueError(f'Unsupported schema_version: {schema_version}')
+        raise ValueError('Unsupported schema_version: ' + schema_version)
 
     data = collections.defaultdict(lambda: collections.defaultdict(dict))
 
@@ -81,7 +81,7 @@ def generate_data(schema_version):  # () -> None  # noqa: C901
         has_dynamic_library = hasattr(sys, 'dllhandle')
         has_static_library = not has_dynamic_library
     else:
-        raise NotADirectoryError(f'Unknown platform: {os.name}')
+        raise NotADirectoryError('Unknown platform: ' + os.name)
 
     # On POSIX, EXT_SUFFIX is set regardless if extension modules are supported
     # or not, and on Windows older versions of CPython only set EXT_SUFFIX when
