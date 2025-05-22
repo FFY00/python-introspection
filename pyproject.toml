@@ -6,6 +6,7 @@ build-backend = 'flit_core.buildapi'
 name = 'python-instrospection'
 authors = [{name = 'Filipe Laíns', email = 'lains@riseup.net'}]
 license = {file = 'LICENSE'}
+requires-python = '>= 3.9'
 classifiers = ['License :: OSI Approved :: MIT License']
 dynamic = ['version', 'description']
 
