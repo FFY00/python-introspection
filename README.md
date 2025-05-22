@@ -30,7 +30,7 @@ Option                 | Description
 
 ### `generate-build-details`
 
-Generated a`build-details.json` file (from [PEP 739](https://peps.python.org/pep-0739/)).
+Generated a `build-details.json` file (from [PEP 739](https://peps.python.org/pep-0739/)).
 
 ```sh
 $ python -m python_introspection generate-build-details (options)
