@@ -61,6 +61,7 @@ def generate_data(schema_version):
     PY3LIBRARY = sysconfig.get_config_var('PY3LIBRARY')
     LIBPYTHON = sysconfig.get_config_var('LIBPYTHON')
     LIBPC = sysconfig.get_config_var('LIBPC')
+    LIBPL = sysconfig.get_config_var('LIBPL')
 
     if os.name == 'posix':
         # On POSIX, LIBRARY is always the static library, while LDLIBRARY is the
@@ -106,9 +107,21 @@ def generate_data(schema_version):
         data['libpython']['link_extensions'] = bool(LIBPYTHON)
 
     if has_static_library:
-        data['libpython']['static'] = os.path.join(LIBDIR, LIBRARY)
+       # Static library can be in a variety of places
+       static_libpython_candidates = [
+           os.path.join(LIBDIR, LIBRARY),
+           os.path.join(LIBPL, LIBRARY),
+       ]
+       try:
+           data['libpython']['static'] = next(filter(os.path.exists, static_libpython_candidates))
+       except StopIteration:
+           message = (
+               "sysconfig.get_config_var('LIBRARY') is set, but none of the following paths "
+               'were found on the system: ' + ', '.join(static_libpython_candidates)
+           )
+           warnings.warn(message, RuntimeWarning)
 
-    data['c_api']['include'] = sysconfig.get_path('include')
+    data['c_api']['headers'] = sysconfig.get_path('include')
     if LIBPC:
         data['c_api']['pkgconfig_path'] = LIBPC
 
@@ -135,6 +148,11 @@ def make_paths_relative(data, config_path=None):  # (dict[str, Any], str | None)
             container = data
             for part in parent.split('.'):
                 container = container[part]
+
+            # KeyError not raised in DefaultDict
+            if child not in container:
+                continue
+
             current_path = container[child]
         except KeyError:
             continue
