@@ -4,11 +4,12 @@ build-backend = 'flit_core.buildapi'
 
 [project]
 name = 'python-introspection'
+version = '0.1.0'
+description = 'Python library and CLI tool to introspect Python installations'
 authors = [{name = 'Filipe Laíns', email = 'lains@riseup.net'}]
 license = {file = 'LICENSE'}
 requires-python = '>= 3.9'
 classifiers = ['License :: OSI Approved :: MIT License']
-dynamic = ['version', 'description']
 
 [project.urls]
 Home = 'https://github.com/FFY00/python-introspection'
