@@ -24,7 +24,7 @@ class Console:
         'underline': '\33[4m',
         'reset': '\33[0m',
     }
-    _STYLES_COLOR_DISABLED: ClassVar[Mapping[str, str]] = {style: '' for style in _STYLES_COLOR_ENABLED}
+    _STYLES_COLOR_DISABLED: ClassVar[Mapping[str, str]] = dict.fromkeys(_STYLES_COLOR_ENABLED, '')
 
     def __init__(self) -> None:
         self.styles = self._get_styles_dict()
