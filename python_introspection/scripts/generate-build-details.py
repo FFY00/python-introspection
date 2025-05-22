@@ -95,12 +95,12 @@ def generate_data(schema_version):
                 data['abi']['stable_abi_suffix'] = suffix
                 break
 
-        data['libpython']['dynamic'] = os.path.join(LIBDIR, LDLIBRARY)
-        if not os.path.exists(data['libpython']['dynamic']):
-            # macOS has a different location
-            PYTHONFRAMEWORKPREFIX = sysconfig.get_config_var('PYTHONFRAMEWORKPREFIX')
-            if os.path.exists(os.path.join(PYTHONFRAMEWORKPREFIX, LDLIBRARY)):
-                data['libpython']['dynamic'] = os.path.join(PYTHONFRAMEWORKPREFIX, LDLIBRARY)
+        PYTHONFRAMEWORKPREFIX = sysconfig.get_config_var('PYTHONFRAMEWORKPREFIX')
+        if PYTHONFRAMEWORKPREFIX:
+            # macOS framework builds have a custom location
+            data['libpython']['dynamic'] = os.path.join(PYTHONFRAMEWORKPREFIX, LDLIBRARY)
+        else:
+            data['libpython']['dynamic'] = os.path.join(LIBDIR, LDLIBRARY)
 
         # FIXME: Not sure if windows has a different dll for the stable ABI, and
         #        even if it does, currently we don't have a way to get its name.
