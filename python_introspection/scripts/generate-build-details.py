@@ -107,11 +107,19 @@ def generate_data(schema_version):
         data['libpython']['link_extensions'] = bool(LIBPYTHON)
 
     if has_static_library:
-        # Static library can be in a variety of places
-        data['libpython']['static'] = os.path.join(LIBDIR, LIBRARY)
-        if not os.path.exists(data['libpython']['static']):
-            if os.path.exists(os.path.join(LIBPL, LIBRARY)):
-                data['libpython']['static'] = os.path.join(LIBPL, LIBRARY)
+       # Static library can be in a variety of places
+       static_libpython_candidates = [
+           os.path.join(LIBDIR, LIBRARY),
+           os.path.join(LIBPL, LIBRARY),
+       ]
+       try:
+           data['libpython']['static'] = next(filter(os.path.exists, static_libpython_candidates))
+       except StopIteration:
+           message = (
+               "sysconfig.get_config_var('LIBRARY') is set, but none of the following paths "
+               'were found on the system: ' + ', '.join(static_libpython_candidates)
+           )
+           warnings.warn(message, RuntimeWarning)
 
     data['c_api']['headers'] = sysconfig.get_path('include')
     if LIBPC:
