@@ -1,4 +1,3 @@
-
 # python-introspection
 
 Python library and CLI tool to introspect Python installations.
