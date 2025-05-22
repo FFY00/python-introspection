@@ -24,7 +24,7 @@ def get_dict_key(container, key):  # (dict[str, Any], str) -> dict[str, Any]
     return container
 
 
-def generate_data(schema_version):
+def generate_data(schema_version):  # noqa: C901
     """Generate the build-details.json data (PEP 739).
 
     :param schema_version: The schema version of the data we want to generate.
