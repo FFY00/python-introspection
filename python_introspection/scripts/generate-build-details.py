@@ -38,7 +38,11 @@ def generate_data(schema_version):
     data['schema_version'] = schema_version
 
     data['base_prefix'] = sysconfig.get_config_var('installed_base')
-    data['base_interpreter'] = sys._base_executable
+
+    base_interpreter = sysconfig.get_config_var('EXENAME') or getattr(sys, '_base_executable', None)
+    if base_interpreter:
+        data['base_interpreter'] = base_interpreter
+
     data['platform'] = sysconfig.get_platform()
 
     data['language']['version'] = sysconfig.get_python_version()
