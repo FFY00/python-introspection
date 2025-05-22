@@ -3,6 +3,13 @@
 
 Python library and CLI tool to introspect Python installations.
 
+## Installation
+
+```sh
+$ pip install python-instrospection
+
+```
+
 ## Usage (CLI)
 
 ```sh
