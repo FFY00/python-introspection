@@ -5,7 +5,7 @@ Python library and CLI tool to introspect Python installations.
 
 ## Usage (CLI)
 
-```SH
+```sh
 $ python -m python_introspection (options) <command> ...
 ```
 
