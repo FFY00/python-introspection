@@ -25,7 +25,7 @@ $ python -m python_introspection (options) <command> ...
 Option                 | Description
 ---------------------- | -------------------------------------------------------
 `--interpreter <path>` | Selects the Python interpreter to instrospect.
-`--write-to <path>`    | Write introspection data to the specified file.
+`--output <path>`      | Write introspection data to the specified file.
 
 
 ### `generate-build-details`
@@ -40,3 +40,10 @@ Option                 | Description
 -------------------------- | ---------------------------------------------------
 `--schema-version <value>` | Schema version of the build-details.json file to generate.
 `--relative-paths`         | Whether to specify paths as absolute, or as relative paths to `base_prefix`.
+
+
+A full example, putting together the base `--interpreter` and `--output` options with
+the options to `generate-build-details`:
+```sh
+$ python -m python_introspection --interpreter $(which python) --output build-details.json generate-build-details --relative-paths
+```
