@@ -54,11 +54,12 @@ def main() -> None:
         )
     assert data
 
-    json_data = json.dumps(data, indent=2)
     if args.output:
-        args.parent.mkdir(parents=True, exist_ok=True)
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        with open(args.output, 'w') as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
     else:
-        print(json_data)
+        print(json.dumps(data, ensure_ascii=False, indent=2))
 
 
 if __name__ == '__main__':
