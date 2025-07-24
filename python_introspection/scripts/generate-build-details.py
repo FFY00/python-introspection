@@ -203,7 +203,7 @@ def main():  # () -> None
         'warnings': [
             {
                 'message': str(warning.message),
-                'category': '.'.join(warning.category.__module__, warning.category.__qualname__),
+                'category': '.'.join((warning.category.__module__, warning.category.__qualname__)),
                 'filename': warning.filename,
                 'lineno': warning.lineno,
             }
